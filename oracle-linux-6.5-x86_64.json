@@ -2,7 +2,9 @@
   "variables": {
     "iso_location": "/Users/edwin/Downloads",
     "harddisk_size": "40960",
-    "vm_name": "OEL6.5"
+    "vm_name": "OEL6_5",
+    "outputfile": "OEL6_5.box",
+    "compression": 6
   },
   "builders": [{
     "vm_name": "{{user `vm_name`}}",
@@ -21,15 +23,15 @@
     "iso_checksum_type": "sha1",
 
     "boot_command": [
-      "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/OEL6.5-x86_64/ks.cfg<enter><wait>"
+      "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/OEL6_5-x86_64/ks.cfg<enter><wait>"
     ],
     "boot_wait": "12s",
 
     "http_directory": "http",
     "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
 
-    "ssh_username": "provision",
-    "ssh_password": "provision",
+    "ssh_username": "vagrant",
+    "ssh_password": "vagrant",
     "ssh_port": 22,
     "ssh_wait_timeout": "10000s",
 
@@ -38,16 +40,23 @@
       ["modifyvm", "{{.Name}}", "--cpus", "1"]
     ],
 
-    "shutdown_command": "echo 'provision'|sudo -S /sbin/halt -h -p"
+    "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p"
   }],
   "provisioners": [{
     "type": "shell",
-    "execute_command": "echo 'provision' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+    "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
     "scripts": [
       "scripts/afterconfig.sh",
       "scripts/puppet-bootstrap/centos_6_x.sh",
       "scripts/vboxguest.sh",
       "scripts/compact.sh"
     ]
-  }]
+  }],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "build/{{user `outputfile`}}",
+      "compression_level": "{{user `compression`}}"
+    }
+  ]  
 }
