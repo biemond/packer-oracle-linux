@@ -18,9 +18,9 @@
     "hard_drive_interface": "sata",
     "disk_size": "{{user `harddisk_size`}}",
 
-    "iso_url": "{{user `iso_location`}}/V46135-01.iso",
-    "iso_checksum": "74BCAC408A164535ECD483503244E312A292BF84",
-    "iso_checksum_type": "sha1",
+    "iso_url": "{{user `iso_location`}}/OracleLinux-R7-U0-Server-x86_64-dvd.iso",
+    "iso_checksum": "14107114f3eece76d16e5ec3fee5f524b09f9829b0ac38474ee676ddd4d2b9c2",
+    "iso_checksum_type": "sha256",
 
     "boot_command": [
       "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/OEL7_0-x86_64/ks.cfg<enter><wait>"
@@ -58,5 +58,5 @@
       "output": "build/{{user `outputfile`}}",
       "compression_level": "{{user `compression`}}"
     }
-  ]  
+  ]
 }
