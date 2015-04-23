@@ -2,8 +2,8 @@
   "variables": {
     "iso_location": "iso",
     "harddisk_size": "40960",
-    "vm_name": "OEL7_0",
-    "outputfile": "OEL7_0.box",
+    "vm_name": "OEL7_1",
+    "outputfile": "OEL7_1.box",
     "compression": 6
   },
   "builders": [{
@@ -18,12 +18,12 @@
     "hard_drive_interface": "sata",
     "disk_size": "{{user `harddisk_size`}}",
 
-    "iso_url": "{{user `iso_location`}}/OracleLinux-R7-U0-Server-x86_64-dvd.iso",
-    "iso_checksum": "14107114f3eece76d16e5ec3fee5f524b09f9829b0ac38474ee676ddd4d2b9c2",
+    "iso_url": "{{user `iso_location`}}/OracleLinux-R7-U1-Server-x86_64-dvd.iso",
+    "iso_checksum": "0eb3b9d205f470d9a2868b32b5df1541363aeb46a40c62baf23e3c82722c915a",
     "iso_checksum_type": "sha256",
 
     "boot_command": [
-      "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/OEL7_0-x86_64/ks.cfg<enter><wait>"
+      "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/OEL7_1-x86_64/ks.cfg<enter><wait>"
     ],
     "boot_wait": "12s",
 
